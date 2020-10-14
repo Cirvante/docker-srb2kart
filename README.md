@@ -1,2 +1,4 @@
-# docker-srb2kart
-Docker image for SRB2Kart, a multiplayer kart racing mod based off the Sonic Robo Blast 2 fangame. This image allows for spinning up containerized dedicated servers with minimal effort.
+# docker-srb2kart: Sonic Robo Blast 2 Kart server base image
+Docker image for SRB2Kart, a multiplayer kart racing mod based off the Sonic Robo Blast 2 fangame. This image allows for spinning up multiple containerized instances of an SRB2Kart dedicated server ready to deploy on a user's local machine or cloud hosting platform of their choice with minimal setup.
+
+The docker-srb2kart image is built as a layer on top of the Ubuntu 20.04 base image, and pulls the latest version of the SRB2Kart package from the official KartKrew PPA repository. This base image provides a vanilla SRB2Kart install; no additional WADs or .pk3 files are included. However, users are free to supply their own add-ons by modifying the included docker-compose file to provide a bind mount pointing to the appropriate WADs directory.
