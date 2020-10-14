@@ -25,13 +25,10 @@
 version: "3.0"
 services:
   srb2k-server:
-    container_name: srb2k_srv1
+    container_name: srb2k-server
     image: srb2k-server:latest
     ports: 
       - "5029"
-    volumes:
-      - ./cfg:/home/srb2kart/.srb2kart:ro
-      - ./wads:/srb2k-server/wads:ro
     environment:
       - SRB2K_PORT=5029
     network_mode: "host"
