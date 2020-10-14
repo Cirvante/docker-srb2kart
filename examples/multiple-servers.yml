@@ -1,0 +1,27 @@
+version: "3.0"
+services:
+  srb2k-server-1:
+    container_name: srb2k_srv1
+    image: srb2k-server:test
+    ports: 
+      - "5029"
+    volumes:
+      - ./cfg/srv1:/home/srb2kart/.srb2kart:ro
+      - ./wads:/srb2k-server/wads:ro
+    environment:
+      - SRB2K_PORT=5029
+    network_mode: "host"
+    restart: always
+  srb2k-server-2:
+    container_name: srb2k_srv2
+    image: srb2k-server:test
+    ports: 
+      - "5030"
+    volumes:
+      - ./cfg/srv2:/home/srb2kart/.srb2kart:ro
+      - ./wads:/srb2k-server/wads:ro
+    environment:
+      - SRB2K_PORT=5030
+    network_mode: "host"
+    restart: always
+
