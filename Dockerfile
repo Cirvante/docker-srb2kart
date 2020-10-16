@@ -35,8 +35,8 @@ COPY start_srb2k_server.sh .
 
 # Install the add-apt-repository command, since it does not ship with 
 # the Ubuntu base image
-RUN --mount=target=/ver/lib/apt/lists,type=cache \
-    --mount=target=/ver/cache/apt,type=cache \
+RUN --mount=target=/var/lib/apt/lists,type=cache \
+    --mount=target=/var/cache/apt,type=cache \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common
 
