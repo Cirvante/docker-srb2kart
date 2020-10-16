@@ -27,8 +27,12 @@
 # Set base WAD directory to scan for additional wad/pk3/kart files
 SRB2WADDIR=/srb2k-server/wads
 WADS=$(find ${SRB2WADDIR} -type f | egrep "*.(pk3|wad|kart)$" | tr '\n' ' ')
-
 echo "SRB2K default WAD directory is ${SRB2WADDIR}"
+
+# If base port was not set, use the default (5029)
+if [[ -z ${SRB2K_PORT} ]]; then
+   SRB2K_PORT=5029
+fi
 echo "Initializing SRB2K server on port ${SRB2K_PORT}"
 
 # Construct the startup command for the server
