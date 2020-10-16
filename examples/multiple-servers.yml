@@ -1,8 +1,33 @@
+#####################################################################
+#
+# FILE: multiple-servers.yml
+#
+# DESCRIPTION: An example Docker Compose recipe for instantiating 
+#              two side by side SRB2K servers with different bind
+#              mounts for WADs and configuration.
+#
+# AUTHOR: Cirvante
+# 
+# LICENSE: GPL 2.0
+#
+# This program is free software: you can redistribute it and/or modify  
+# it under the terms of the GNU General Public License as published by  
+# the Free Software Foundation, version 2.
+#
+# This program is distributed in the hope that it will be useful, but 
+# WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License 
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#####################################################################
+
 version: "3.0"
 services:
   srb2k-server-1:
     container_name: srb2k_srv1
-    image: srb2k-server:test
+    image: cirvante/srb2kart-server:${SRB2K_VERSION:-latest}
     ports: 
       - "5029"
     volumes:
@@ -14,7 +39,7 @@ services:
     restart: always
   srb2k-server-2:
     container_name: srb2k_srv2
-    image: srb2k-server:test
+    image: cirvante/srb2kart-server:${SRB2K_VERSION:-latest}
     ports: 
       - "5030"
     volumes:

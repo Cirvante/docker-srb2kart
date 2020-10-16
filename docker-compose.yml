@@ -26,11 +26,9 @@ version: "3.0"
 services:
   srb2k-server:
     container_name: srb2k-server
-    image: srb2k-server:latest
+    image: cirvante/srb2kart-server:${SRB2K_VERSION:-latest}
     ports: 
       - "5029"
-    environment:
-      - SRB2K_PORT=5029
     network_mode: "host"
     restart: always
 
