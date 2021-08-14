@@ -26,9 +26,12 @@ version: "3.0"
 services:
   srb2k-server:
     container_name: srb2k-server
+    hostname: srb2k-server
     image: cirvante/srb2kart-server:1.3
     ports: 
-      - "5029"
+      - "5029:5029/udp"
     network_mode: "host"
+    stdin_open: true
+    tty: true
     restart: always
 

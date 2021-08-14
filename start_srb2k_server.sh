@@ -26,8 +26,22 @@
 
 # Set base WAD directory to scan for additional wad/pk3/kart files
 SRB2WADDIR=/srb2k-server/wads
-WADS=$(find ${SRB2WADDIR} -type f | egrep "*.(pk3|wad|kart)$" | tr '\n' ' ')
 echo "SRB2K default WAD directory is ${SRB2WADDIR}"
+
+# Set configuration directory to scan for blacklist/priority files
+CFGDIR=/home/srb2kart/.srb2kart
+if [[ -z ${BLACKLIST_FILE} ]]; then
+    BLACKLIST_FILE="${CFGDIR}/blacklist.cfg"
+fi
+echo "Blacklisted WADs file: ${BLACKLIST_FILE}"
+
+if [[ -z ${PRIORITY_FILE} ]]; then
+    PRIORITY_FILE="${CFGDIR}/priority.cfg"
+fi
+echo "Priority WADs file: ${PRIORITY_FILE}"
+
+# Configure the set of WADs to load on server startup
+WADS=$(python3 filter_wads.py --wads-dir="${SRB2WADDIR}" --blacklist="${BLACKLIST_FILE}" --load-first="${PRIORITY_FILE}")
 
 # If base port was not set, use the default (5029)
 if [[ -z ${SRB2K_PORT} ]]; then

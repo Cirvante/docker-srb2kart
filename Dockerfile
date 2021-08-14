@@ -32,6 +32,7 @@ WORKDIR /srb2k-server
 
 # Copy the entrypoint shell script into the container
 COPY start_srb2k_server.sh .
+COPY filter_wads.py .
 
 # Install the add-apt-repository command, since it does not ship with 
 # the Ubuntu base image
@@ -58,4 +59,4 @@ RUN groupadd -r srb2kart && \
 USER srb2kart
 
 # Entrypoint for the application
-ENTRYPOINT /srb2k-server/start_srb2k_server.sh
+ENTRYPOINT ["/bin/bash", "-i", "/srb2k-server/start_srb2k_server.sh"]

@@ -1,10 +1,9 @@
 #####################################################################
 #
-# FILE: multiple-servers.yml
+# FILE: docker-compose.yml
 #
-# DESCRIPTION: An example Docker Compose recipe for instantiating 
-#              two side by side SRB2K servers with different bind
-#              mounts for WADs and configuration.
+# DESCRIPTION: Docker Compose recipe for instantiating an SRB2Kart 
+#              server container.
 #
 # AUTHOR: Cirvante
 # 
@@ -25,34 +24,23 @@
 
 version: "3.0"
 services:
-  srb2k-server-1:
-    container_name: srb2k_srv1
-    hostname: srb2k_srv1
-    image: cirvante/srb2kart-server:1.3
+  srb2k-server:
+    container_name: srb2k-server
+    hostname: srb2k-server
+    image: cirvante/srb2kart-server:${SRB2K_VERSION:-latest}
     ports: 
-      - "5029"
-    volumes:
-      - ./cfg/srv1:/home/srb2kart/.srb2kart:ro
-      - ./wads:/srb2k-server/wads:ro
+      - "5029:5029/udp"
     environment:
       - SRB2K_PORT=5029
-    network_mode: "host"
+    networks:
+      - srb2k-net
     stdin_open: true
     tty: true
     restart: always
-  srb2k-server-2:
-    container_name: srb2k_srv2
-    hostname: srb2k_srv2
-    image: cirvante/srb2kart-server:1.3
-    ports: 
-      - "5030"
-    volumes:
-      - ./cfg/srv2:/home/srb2kart/.srb2kart:ro
-      - ./wads:/srb2k-server/wads:ro
-    environment:
-      - SRB2K_PORT=5030
-    network_mode: "host"
-    stdin_open: true
-    tty: true
-    restart: always
+networks:
+  srb2k-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "192.168.11.0/24"
 
