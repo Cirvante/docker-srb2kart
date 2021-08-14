@@ -27,7 +27,7 @@ services:
   srb2k-server:
     container_name: srb2k-server
     hostname: srb2k-server
-    image: cirvante/srb2kart-server:1.3
+    image: cirvante/srb2kart-server:${SRB2K_VERSION:-latest}
     ports: 
       - "5029:5029/udp"
     network_mode: "host"
